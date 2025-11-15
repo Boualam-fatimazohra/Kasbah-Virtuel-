@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "type": "module",
   "license": "MIT",
-  "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "build:server": "esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist/api --outfile=index.js",
-    "vercel-build": "pnpm run build && pnpm run build:server",
-    "start": "NODE_ENV=production node dist/api/index.js",
-    "preview": "vite preview --host",
-    "check": "tsc --noEmit",
-    "format": "prettier --write ."
-  },
+  
+    "scripts": {
+      "dev": "vite --host",
+      "build": "vite build",
+      "build:server": "esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outfile=dist/api/index.js",
+      "vercel-build": "npm run build && npm run build:server",
+      "start": "NODE_ENV=production node dist/api/index.js",
+      "preview": "vite preview --host",
+      "check": "tsc --noEmit",
+      "format": "prettier --write ."
+    },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
