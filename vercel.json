@@ -5,6 +5,7 @@
     ],
     "routes": [
       { "src": "/(.*)", "dest": "server/index.ts" }
-    ]
+    ],
+    "installCommand": "pnpm install --no-frozen-lockfile"
   }
   
