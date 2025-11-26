@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Gamepad2 } from 'lucide-react';
-import { AuthService } from './services'; // Assurez-vous que le chemin est correct
+import { AuthService } from '@/components/services/services'; // Assurez-vous que le chemin est correct
 
 export default function Authentification({ onLoginSuccess }) {
   const [username, setUsername] = useState('');

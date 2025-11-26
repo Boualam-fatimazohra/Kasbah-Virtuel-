@@ -2,102 +2,102 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { useLocation } from 'wouter'; // ✅ Ajout important
+import { useLocation } from 'wouter';
 
-const spacesAr = [
-  { id: 'virtual-tours', label: 'الزيارات الافتراضية' },
-  { id: 'intangible-heritage', label: 'التراث اللامادي' },
-  { id: 'handicrafts', label: 'الحرف اليدوية' },
-  { id: 'games', label: 'الألعاب التعليمية' },
-  { id: 'videos', label: 'الفيديوهات التربوية' },
-  { id: 'podcast', label: 'البودكاست الثقافي' },
-  { id: 'tourism', label: 'السياحة الثقافية' },
-  { id: 'Activities', label: 'الأنشطة المدرسية' },
-];
-
-const spacesFr = [
-  { id: 'virtual-tours', label: 'Visites Virtuelles' },
-  { id: 'intangible-heritage', label: 'Patrimoine Immatériel' },
-  { id: 'handicrafts', label: 'Artisanat' },
-  { id: 'games', label: 'Jeux Éducatifs' },
-  { id: 'videos', label: 'Vidéos Éducatives' },
-  { id: 'podcast', label: 'Podcast Culturel' },
-  { id: 'tourism', label: 'Tourisme Culturel' },
-  { id: 'Activities', label: 'Activités Scolaires' },
-];
-
-const translations = {
-  ar: {
-    subtitle: 'منصة التراث الثقافي',
-  },
-  fr: {
-    subtitle: 'Plateforme du patrimoine culturel',
-  },
-};
-
-// ✅ Supprimer onNavigate des props
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
-  const [, setLocation] = useLocation(); // ✅ Utiliser wouter
-  const spaces = language === 'ar' ? spacesAr : spacesFr;
-  const t = translations[language];
+  const [, setLocation] = useLocation();
+  const [active, setActive] = useState('');
+
+  const spaces = language === 'ar' ? [
+    { id: 'virtual-tours', label: 'الزيارات الافتراضية' },
+    { id: 'intangible-heritage', label: 'التراث اللامادي' },
+    { id: 'handicrafts', label: 'الحرف اليدوية' },
+    { id: 'games', label: 'الألعاب التعليمية' },
+    { id: 'videos', label: 'الفيديوهات التربوية' },
+    { id: 'podcast', label: 'البودكاست الثقافي' },
+    { id: 'tourism', label: 'السياحة الثقافية' },
+    { id: 'Activities', label: 'الأنشطة المدرسية' },
+  ] : [
+    { id: 'virtual-tours', label: 'Visites Virtuelles' },
+    { id: 'intangible-heritage', label: 'Patrimoine Immatériel' },
+    { id: 'handicrafts', label: 'Artisanat' },
+    { id: 'games', label: 'Jeux Éducatifs' },
+    { id: 'videos', label: 'Vidéos Éducatives' },
+    { id: 'podcast', label: 'Podcast Culturel' },
+    { id: 'tourism', label: 'Tourisme Culturel' },
+    { id: 'Activities', label: 'Activités Scolaires' },
+  ];
+
+  const handleNavigate = (id: string) => {
+    setLocation(`/${id}`);
+    setActive(id);
+  };
 
   const toggleLanguage = () => {
     setLanguage(language === 'fr' ? 'ar' : 'fr');
   };
 
-  // ✅ Nouvelle fonction de navigation
-  const handleNavigate = (id: string) => {
-    setLocation(`/${id}`);
-  };
-
   return (
     <nav className={`sticky top-0 z-50 bg-white shadow-md border-b border-border ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center gap-2">
-            <div className={language === 'ar' ? 'text-right' : 'text-left'}>
-              <h1 className="text-xl font-bold text-accent cursor-pointer" onClick={() => setLocation('/')}>
+        
+        {/* HEADER */}
+        <div className="flex items-center justify-between h-20">
+
+          {/* LOGO complètement à gauche (FR) ou à droite (AR) */}
+          <div className={`${language === 'ar' ? 'order-3' : 'order-1'}`}>
+            <div className="cursor-pointer" onClick={() => setLocation('/')}>
+              <h1 className="text-xl font-bold text-accent">
                 KasbahVR
               </h1>
-              <p className="text-xs text-muted-foreground">{t.subtitle}</p>
+              <p className="text-xs text-muted-foreground">
+                {language === 'ar' ? 'منصة التراث الثقافي' : 'Plateforme du patrimoine culturel'}
+              </p>
             </div>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-2">
+          {/* MENU au centre */}
+          <div className={`hidden lg:flex items-center gap-2 ${language === 'ar' ? 'order-2' : 'order-2'}`}>
             {spaces.map((space) => (
               <Button
                 key={space.id}
                 variant="ghost"
                 size="sm"
-                onClick={() => handleNavigate(space.id)} // ✅ Utiliser handleNavigate
-                className="text-sm whitespace-nowrap hover:bg-blue-300"
+                onClick={() => handleNavigate(space.id)}
+                className={`text-xl whitespace-nowrap px-4 py-2 rounded-full transition-all duration-300
+                  ${active === space.id ? 'bg-orange-500 text-white font-bold' : 'hover:bg-orange-200 hover:text-orange-600'}
+                `}
               >
                 {space.label}
               </Button>
             ))}
+          </div>
 
-            {/* Bouton changement de langue */}
+          {/* BOUTON LANGUE complètement à droite (FR) ou à gauche (AR) */}
+          <div className={`${language === 'ar' ? 'order-1' : 'order-3'}`}>
             <Button
               variant="outline"
               size="sm"
               onClick={toggleLanguage}
-              className={`${language === 'ar' ? 'mr-4' : 'ml-4'} text-sm`}
+              className="text-sm"
             >
               {language === 'fr' ? '🇲🇦 AR' : '🇫🇷 FR'}
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button className="lg:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
+          {/* BOUTON MENU MOBILE */}
+          <button
+            className="lg:hidden p-2"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
+
         </div>
 
-        {/* Mobile Menu */}
+        {/* MENU MOBILE */}
         {isOpen && (
           <div className="lg:hidden border-t border-border pb-4">
             <div className="grid grid-cols-2 gap-2 pt-4">
@@ -107,16 +107,15 @@ export default function Navigation() {
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    handleNavigate(space.id); // ✅ Utiliser handleNavigate
+                    handleNavigate(space.id);
                     setIsOpen(false);
                   }}
-                  className="text-sm justify-start"
+                  className={`text-sm justify-start ${active === space.id ? 'bg-orange-400 text-white font-bold' : ''}`}
                 >
                   {space.label}
                 </Button>
               ))}
 
-              {/* Bouton langue mobile */}
               <Button
                 variant="outline"
                 size="sm"
@@ -131,6 +130,7 @@ export default function Navigation() {
             </div>
           </div>
         )}
+
       </div>
     </nav>
   );

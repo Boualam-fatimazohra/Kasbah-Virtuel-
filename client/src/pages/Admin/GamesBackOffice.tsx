@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Edit, Trash2, Save, X, Eye, LogOut, Home, Gamepad2, Menu, Search } from 'lucide-react';
-import { AuthService, GamesService } from './services';
+import { AuthService, GamesService } from '@/components/services/services';
 
 // --- Composants Internes (Dashboard, GamesManager) ---
 

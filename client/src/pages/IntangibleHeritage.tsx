@@ -6,9 +6,9 @@ import Navigation from '@/components/Navigation';
 const heritageItemsAr = [
   {
     title: 'الأزياء الأمازيغية التقليدية',
-    image: '/images/tradition.jpg',
+    image: '/images/azya2.jpg',
     description: 'عرض تفاعلي للأزياء التقليدية بدرعة تافيلالت مع شرح الرموز الثقافية',
-    icon: '👘',
+    icon: '',
     details: [
       'الجلابة التقليدية',
       'الملحفة والتجار',
@@ -18,9 +18,9 @@ const heritageItemsAr = [
   },
   {
     title: 'الحلي والمجوهرات التقليدية',
-    image: '/images/bijoux.png',
+    image: '/images/bijo.jpg',
     description: 'اكتشف الحلي الفضية والذهبية وتفسير دلالاتها الثقافية والرمزية',
-    icon: '💎',
+    icon: '',
     details: [
       'الخلاخل الفضية',
       'الأساور والقلائد',
@@ -30,9 +30,9 @@ const heritageItemsAr = [
   },
   {
     title: 'الأفاتار الافتراضي',
-    image: '/images/avatar.jpg',
+    image: '/images/avatarr.jpg',
     description: 'خاصية تفاعلية تتيح لك ارتداء الأزياء التقليدية بشكل افتراضي',
-    icon: '🎭',
+    icon: '',
     details: [
       'تخصيص الأفاتار',
       'تجربة الأزياء المختلفة',
@@ -45,9 +45,9 @@ const heritageItemsAr = [
 const heritageItemsFr = [
   {
     title: 'Costumes Amazighs Traditionnels',
-    image: '/images/tradition.jpg',
+    image: '/images/azya2.jpg',
     description: 'Exposition interactive des costumes traditionnels de Drâa-Tafilalet avec explication des symboles culturels',
-    icon: '👘',
+    icon: '',
     details: [
       'La djellaba traditionnelle',
       'La melhafa et les habits',
@@ -57,9 +57,9 @@ const heritageItemsFr = [
   },
   {
     title: 'Bijoux et Parures Traditionnels',
-    image: '/images/bijoux.png',
+    image: '/images/bijo.png',
     description: 'Découvrez les bijoux en argent et en or et l\'interprétation de leurs significations culturelles et symboliques',
-    icon: '💎',
+    icon: '',
     details: [
       'Les khalkhal en argent',
       'Les bracelets et colliers',
@@ -69,9 +69,9 @@ const heritageItemsFr = [
   },
   {
     title: 'Avatar Virtuel',
-    image: '/images/avatar.jpg',
+    image: '/images/avatarr.jpg',
     description: 'Fonctionnalité interactive vous permettant de porter virtuellement des costumes traditionnels',
-    icon: '🎭',
+    icon: '',
     details: [
       'Personnaliser l\'avatar',
       'Essayer différents costumes',
@@ -110,8 +110,13 @@ export default function IntangibleHeritage() {
   const heritageItems = language === 'ar' ? heritageItemsAr : heritageItemsFr;
 
   return (
-    <div className={`min-h-screen bg-gradient-to-b from-background to-muted/20 ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
-              <Navigation />
+<div
+  className={`min-h-screen bg-gradient-to-b from-background to-muted/20 ${
+    language === 'ar' ? 'text-right' : 'text-left'
+  }`}
+  dir={language === 'ar' ? 'rtl' : 'ltr'}
+>
+      <Navigation />
 
       <div className="container mx-auto px-4 py-12">
         {/* Header */}
@@ -127,23 +132,23 @@ export default function IntangibleHeritage() {
           {heritageItems.map((item) => (
             <Card
               key={item.title}
-              className="relative overflow-hidden rounded-xl shadow-lg group"
+              className="overflow-hidden rounded-xl shadow-lg group"
             >
-              {/* Background Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: `url(${item.image})` }}
-              />
-            
-              {/* Overlay noir transparent */}
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition"></div>
-            
-              {/* Content */}
-              <div className="relative p-8 text-center text-white">
-                <div className="text-6xl mb-4">{item.icon}</div>
+              {/* IMAGE EN HAUT */}
+              <div className="h-64 overflow-hidden">
+                <div
+                  className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+                  style={{ backgroundImage: `url(${item.image})` }}
+                  />
+              </div>
+
+              {/* TEXTE EN-DESSOUS DE L'IMAGE */}
+              <div className="p-6 text-center space-y-2">
+                <div className="text-5xl mb-3">{item.icon}</div>
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-sm mb-6">{item.description}</p>
-            
+                <p className="text-sm text-muted-foreground mb-4">{item.description}</p>
+                
+                {/* BOUTON */}
                 <Button className="bg-accent hover:bg-accent/90 text-white w-full">
                   {t.discoverMore}
                 </Button>
@@ -170,114 +175,163 @@ export default function IntangibleHeritage() {
             </div>
           </div>
         </div>
-        <section className="py-16 bg-white">
-  <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
-    
-    <h2 className="text-2xl font-semibold mb-2">Contactez-nous</h2>
-    <hr className="mb-6" />
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-      {/* Gauche */}
-      <div className="space-y-4">
-
-        {/* Prénom */}
-        <div>
-          <label className="block text-gray-700 mb-1">Votre Prénom</label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-              👤
-            </span>
-            <input
-              type="text"
-              className="w-full border-2 border-indigo-200 rounded-md pl-10 py-2 focus:border-indigo-400 outline-none"
-              placeholder=" "
-            />
+        {/* Contact Section - Professional & Transparent */}
+       
+      </div>
+      <section className="py-16 mt-12 relative overflow-hidden">
+          {/* Smoke/Fog Background Effect */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-0 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
           </div>
-        </div>
 
-        {/* Email */}
-        <div>
-          <label className="block text-gray-700 mb-1">Votre adresse e-mail</label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-              📧
-            </span>
-            <input
-              type="email"
-              className="w-full border-2 border-indigo-200 rounded-md pl-10 py-2 focus:border-indigo-400 outline-none"
-              placeholder="about@gmail.com"
-            />
+          <div className="max-w-6xl mx-auto relative z-10">
+            
+            {/* Header */}
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-foreground mb-3">Contactez-nous</h2>
+              <p className="text-lg text-muted-foreground">Nous sommes à votre écoute pour toute question ou demande d'information</p>
+            </div>
+
+            {/* Contact Form - Transparent with Glass Effect */}
+            <div className="bg-white/40 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 overflow-hidden mb-12">
+              <div className="p-8 md:p-12">
+                <form className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* Nom complet */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-800 mb-2">Nom complet *</label>
+                      <input
+                        type="text"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border-2 border-white/60 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition bg-white/60 backdrop-blur-sm shadow-sm"
+                        placeholder="Votre nom"
+                      />
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-800 mb-2">Adresse e-mail *</label>
+                      <input
+                        type="email"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border-2 border-white/60 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition bg-white/60 backdrop-blur-sm shadow-sm"
+                        placeholder="votre.email@exemple.com"
+                      />
+                    </div>
+
+                    {/* Téléphone */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-800 mb-2">Téléphone</label>
+                      <input
+                        type="tel"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-white/60 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition bg-white/60 backdrop-blur-sm shadow-sm"
+                        placeholder="+212 6XX XX XX XX"
+                      />
+                    </div>
+
+                    {/* Sujet */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-800 mb-2">Sujet *</label>
+                      <input
+                        type="text"
+                        required
+                        className="w-full px-4 py-3 rounded-xl border-2 border-white/60 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition bg-white/60 backdrop-blur-sm shadow-sm"
+                        placeholder="Objet de votre message"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-800 mb-2">Message *</label>
+                    <textarea
+                      required
+                      rows="6"
+                      className="w-full px-4 py-3 rounded-xl border-2 border-white/60 focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none transition resize-none bg-white/60 backdrop-blur-sm shadow-sm"
+                      placeholder="Décrivez votre demande en détail..."
+                    ></textarea>
+                  </div>
+
+                  {/* Submit Button */}
+                  <div className="text-center">
+                    <button
+                      type="submit"
+                      className="inline-flex items-center px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                    >
+                      <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                      Envoyer le message
+                    </button>
+                  </div>
+
+                  <p className="text-center text-sm text-gray-600 font-medium">* Champs obligatoires</p>
+                </form>
+              </div>
+            </div>
+
+            {/* Contact Info Cards - EN DESSOUS DU FORMULAIRE */}
+            <div className="grid md:grid-cols-3 gap-8">
+              {/* YouTube Card */}
+              <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <svg className="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-center mb-3 text-gray-800">YouTube</h3>
+                <a href="https://www.youtube.com/@PatriCodePr%C3%A9serverlepass%C3%A9coder" target="_blank" rel="noopener noreferrer" className="text-center text-blue-600 hover:text-blue-700 block font-medium">
+                  Visitez notre chaîne
+                </a>
+              </div>
+
+              {/* Email Card */}
+              <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-center mb-3 text-gray-800">Email</h3>
+                <p className="text-center text-gray-700 font-medium">kasbahvr@outlook.fr</p>
+              </div>
+
+              {/* Phone Card */}
+              <div className="bg-white/70 backdrop-blur-lg rounded-2xl p-8 shadow-xl border border-white/60 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-center mb-3 text-gray-800">Téléphone</h3>
+                <p className="text-center text-gray-700 font-medium">+212 714-687489</p>
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        {/* Téléphone */}
-        <div>
-          <label className="block text-gray-700 mb-1">Votre téléphone</label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">
-              📱
-            </span>
-            <input
-              type="text"
-              className="w-full border-2 border-indigo-200 rounded-md pl-10 py-2 focus:border-indigo-400 outline-none"
-              placeholder=" "
-            />
-          </div>
-        </div>
-
-      </div>
-
-      {/* Droite */}
-      <div>
-        <label className="block text-gray-700 mb-1">Message</label>
-        <textarea
-          className="w-full h-48 border-2 border-indigo-200 rounded-md p-3 focus:border-indigo-400 outline-none"
-          placeholder="Saisissez ici..."
-        ></textarea>
-      </div>
-
-    </div>
-
-    <div className="mt-6 text-center">
-      <button className="bg-indigo-500 hover:bg-indigo-600 text-white px-8 py-3 rounded-md font-medium shadow-sm">
-        Envoyer le message
-      </button>
-    </div>
-
-    {/* Section Contact direct */}
-    <div className="mt-10 border-t pt-6 flex flex-col md:flex-row justify-around items-center gap-6 text-gray-700">
-      
-      {/* Téléphone */}
-      <div className="flex items-center gap-2">
-        <span className="text-2xl">📞</span>
-        <span>+212 6 12 34 56 78</span>
-      </div>
-
-      {/* Email */}
-      <div className="flex items-center gap-2">
-        <span className="text-2xl">✉️</span>
-        <span>contact@kasbahvr.com</span>
-      </div>
-
-      {/* YouTube */}
-      <div className="flex items-center gap-2">
-        <span className="text-2xl">📺</span>
-        <a
-          href="https://www.youtube.com/channel/UCXXXXXXXXX" 
-          target="_blank"
-          className="underline hover:text-indigo-600"
-        >
-          Chaîne YouTube
-        </a>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-      </div>
-    </div>
-  );
+          {/* CSS for animations */}
+          <style>{`
+            @keyframes blob {
+              0%, 100% { transform: translate(0, 0) scale(1); }
+              25% { transform: translate(20px, -50px) scale(1.1); }
+              50% { transform: translate(-20px, 20px) scale(0.9); }
+              75% { transform: translate(50px, 50px) scale(1.05); }
+            }
+            .animate-blob {
+              animation: blob 7s infinite;
+            }
+            .animation-delay-2000 {
+              animation-delay: 2s;
+            }
+            .animation-delay-4000 {
+              animation-delay: 4s;
+            }
+          `}</style>
+        </section>
+    </div>
+  );
 }
